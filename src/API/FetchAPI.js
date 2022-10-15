@@ -39,22 +39,24 @@ export default function FetchAPI() {
     const setSorter = sorter =>{
         if(sorter == 'price↓')
         {
-            setDatalist([...data.sort((a,b)=>{
+            setDatalist([...data.filter(e=>e.brand === brand).sort((a,b)=>{
                 return a.price < b.price;
             })])
         }else if(sorter == 'price↑'){
-            setDatalist([...data.sort((a,b)=>{
+            setDatalist([...data.filter(e=>e.brand === brand).sort((a,b)=>{
                 return b.price < a.price;
             })])
         }else{
-            setDatalist(data)
+            setDatalist(data.filter(e=>e.brand === brand))
         }
         setSort(sorter)
     }
     const setBrandFilter = brand => {
         if(brand !=='All')
         {
-            setDatalist([...data.filter(e=>e.brand === brand)])
+            setDatalist([...data.filter(e=>e.brand === brand).sort((a,b)=>{
+                return a.price < b.price;
+            })])
         }else{
             setDatalist(data)
         }
