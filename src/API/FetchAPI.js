@@ -27,20 +27,30 @@ export default function FetchAPI() {
             brand: 'LG'
         },
     ]
-    const Item = ({ title },{priced}) => (
-        <View style={styles.item}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.prices}>{priced}</Text>
-        </View>
-    );
     const url = "http://192.168.43.227:3000/products";
     const [data, setData] = useState([]);
     const [datalist,setDatalist] = useState(data);
     const renderItem = ({item}) => (
-        <View key={item.id}>
-            <Item title={item.name} priced={item.price}/>
+        <View key={item.id} style={styles.item}>
+            <Text style={styles.title}>{item.name}</Text>
+            <Text style={styles.prices}>{item.price}</Text>
         </View>
     );
+    const setSorter = sorter =>{
+        if(sorter == 'price↓')
+        {
+            setDatalist([...data.sort((a,b)=>{
+                return a.price < b.price;
+            })])
+        }else if(sorter == 'price↑'){
+            setDatalist([...data.sort((a,b)=>{
+                return b.price < a.price;
+            })])
+        }else{
+            setDatalist(data)
+        }
+        setSort(sorter)
+    }
     const setBrandFilter = brand => {
         if(brand !=='All')
         {
@@ -76,7 +86,7 @@ export default function FetchAPI() {
                     sortTab.map(e => (
                         <TouchableOpacity 
                             style={[styles.btnSortTab, sorter === e.sorter&&styles.btnTabActive]}
-                            onPress={()=> setSort(e.sorter)}
+                            onPress={()=> setSorter(e.sorter)}
                         >
                             <Text>{e.sorter}</Text>
                         </TouchableOpacity>
