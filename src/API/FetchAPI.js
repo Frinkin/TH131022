@@ -109,15 +109,15 @@ export default function FetchAPI({ navigation }) {
                     ))
                 }
             </View>
-            {
-        isLoading ? <Text>loading...</Text>:(
+            {/* {
+        isLoading ? <Text>loading...</Text>:( */}
             <FlatList
                 style={styles.list}
                 data={datalist}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
             />
-            )}
+            {/* )} */}
         </SafeAreaView>
     )
 }
