@@ -5,10 +5,10 @@ import React from "react";
 
 export default function Login({ navigation }) {
   function goSignin() {
-    navigation.navigate("Signin");
+    navigation.replace("Signin");
   }
   function goSignup() {
-    navigation.navigate("Signup");
+    navigation.replace("Signup");
   }
   return (
     <View style={styles.main}>

@@ -17,6 +17,9 @@ export default function Signin({ navigation }) {
       login();
     }
   };
+  function goSignup() {
+    navigation.replace("Signup");
+  }
   const login = async () => {
     let userData = await AsyncStorage.getItem("userData");
     if (userData) {
@@ -77,6 +80,14 @@ export default function Signin({ navigation }) {
           backgroundColor={{ backgroundColor: "#3b5998" }}
           title="Forgot Password"
           onPress={goForgotPassword}
+        />
+        <Text style={{ fontSize: 20, color: "grey", marginTop: 30 }}>OR</Text>
+
+        <MainButton
+          backgroundColor={{ backgroundColor: "#fff" }}
+          color={{ color: "#3975e8" }}
+          title="Don't have an account?"
+          onPress={goSignup}
         />
       </View>
     </View>

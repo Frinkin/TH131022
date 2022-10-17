@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import FetchAPI from "../API/FetchAPI.js";
-export default function Home({ navigation }) {
+export default function Home({navigation}) {
     
     return (
       <View style={styles.main}>
-          <FetchAPI/>
+          <FetchAPI navigation={navigation}/>
       </View>
     );
 }

@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import MainButton from "../components/MainButton";
 import MainLogo from "../components/MainLogo";
 import MainInput from "../components/MainInput";
@@ -10,7 +10,6 @@ export default Signup = ({ navigation }) => {
   const [phone, setPhone] = useState("123");
   const [email, setEmail] = useState("abc@gmail.com");
   const [password, setPassword] = useState("123");
-
   const onSignUp = () => {
     if (name.trim() == "" || !name) {
       alert("Không được để trống họ và tên !");
@@ -24,6 +23,9 @@ export default Signup = ({ navigation }) => {
       createAccount();
     }
   };
+  function goLogin() {
+    navigation.replace("Login");
+  }
   const createAccount = async () => {
     let userData = await AsyncStorage.getItem("userData");
     if (userData) {
@@ -54,7 +56,7 @@ export default Signup = ({ navigation }) => {
     }
     AsyncStorage.setItem("userData", JSON.stringify(userData));
     alert("Đăng ký thành công!");
-    navigation.goBack();
+    goLogin();
   };
 
   return (
@@ -89,6 +91,13 @@ export default Signup = ({ navigation }) => {
           backgroundColor={{ backgroundColor: "#3b5998" }}
           title="Sign Up"
           onPress={onSignUp}
+        />
+        <Text style={{ fontSize: 20, color: "grey", marginTop: 30 }}>OR</Text>
+        <MainButton
+          backgroundColor={{ backgroundColor: "#fff" }}
+          color={{ color: "#3975e8" }}
+          title="Already have an account?"
+          onPress={goLogin}
         />
       </View>
     </View>
