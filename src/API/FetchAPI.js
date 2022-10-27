@@ -11,10 +11,10 @@ export default function FetchAPI({ navigation }) {
     const [sorter, setSort] = useState(['price↓'])
     const sortTab = [
         {
-            sorter: 'price↑'
+            sorter: 'Price↑'
         },
         {
-            sorter: 'price↓'
+            sorter: 'Price↓'
         }
     ]
     const listTab = [
@@ -34,7 +34,6 @@ export default function FetchAPI({ navigation }) {
     const url = "http://192.168.43.227:3000/products";
     const [data, setData] = useState([]);
     const [datalist, setDatalist] = useState(data);
-    const [isLoading, setLoading] = useState(true);
     const renderItem = ({ item }) => (
         <View key={item.id} style={styles.item}>
             <Text style={styles.title} onPress={()=>{goInfo(item.id)}}>{item.name}</Text>
@@ -46,24 +45,23 @@ export default function FetchAPI({ navigation }) {
             .then((res) => res.json())
             .then((json) => setData(json))
             .catch((error) => console.error(error))
-            .then(()=>setLoading(false));
     })
     const setSorter = sorter => {
         if (brand !== "All") {
-            if (sorter == 'price↓') {
+            if (sorter == 'Price↓') {
                 setDatalist([...data.filter(e => e.brand === brand).sort((a, b) => {
                     return a.price < b.price;
                 })])
-            } else if (sorter == 'price↑') {
+            } else if (sorter == 'Price↑') {
                 setDatalist([...data.filter(e => e.brand === brand).sort((a, b) => {
                     return b.price < a.price;
                 })])
             }
-        } else if (sorter == 'price↓') {
+        } else if (sorter == 'Price↓') {
             setDatalist([...data.sort((a, b) => {
                 return a.price < b.price;
             })])
-        } else if (sorter == 'price↑') {
+        } else if (sorter == 'Price↑') {
             setDatalist([...data.sort((a, b) => {
                 return b.price < a.price;
             })])
